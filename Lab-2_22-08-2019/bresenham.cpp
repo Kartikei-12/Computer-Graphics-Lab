@@ -4,9 +4,6 @@ using namespace std;
 
 void my_draw_line(int x1, int y1, int x2, int y2)
 {
-    // if(x1 > x2) {
-    //     swap(x1,x2); swap(y1,y2);
-    // }
     int sign = (x1>x2)? -1 : 1;
     int dx = x2-x1, dy = y2-y1;
     int pK = 2*(dy-dx);
@@ -25,8 +22,6 @@ void my_draw_line(int x1, int y1, int x2, int y2)
 
 int main()
 {
-    // line(2, 10, 8, 17);
-    // my_draw_line(2, 10, 40, 50);
     int x1,x2,y1,y2;
     cout<<"Enter points: ";
     cin>>x1>>y1>>x2>>y2;
