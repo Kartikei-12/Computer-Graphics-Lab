@@ -13,7 +13,7 @@ void my_draw_line(int x1, int y1, int x2, int y2)
         putpixel(floor(x_curr), floor(y_curr), WHITE);
         x_curr += incX;
         y_curr += incY;
-    }  
+    }
 }
 
 int main()

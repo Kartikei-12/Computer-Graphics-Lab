@@ -43,6 +43,10 @@ void my_circle(int x_c, int y_c, int r)
     int p = 1-r;
     for(int x=0, y=r; x<=r;)
     {
+        if(p<0)
+            p += 2*++x + 1;
+        else
+            p += 2*(++x-(--y)) + 1;
         my_putpixel( x + x_c,  y + y_c, WHITE);
         my_putpixel(-x + x_c,  y + y_c, WHITE);
         my_putpixel( x + x_c, -y + y_c, WHITE);
@@ -51,10 +55,6 @@ void my_circle(int x_c, int y_c, int r)
         my_putpixel(-y + x_c,  x + y_c, WHITE);
         my_putpixel( y + x_c, -x + y_c, WHITE);
         my_putpixel(-y + x_c, -x + y_c, WHITE);
-        if(p<0)
-            p += 2*++x + 1;
-        else
-            p += 2*(++x-(--y)) + 1;
     }
 }
 
