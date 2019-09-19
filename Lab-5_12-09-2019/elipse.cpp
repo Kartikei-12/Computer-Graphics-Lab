@@ -22,8 +22,6 @@ void print(const ContainerType<ValueType, AllocType>& v) {
 template<typename T, typename... Rest>
 void print(T t, Rest... rs) { cout<<t<<" "; print(rs...); }
 
-
-
 int my_SIZE[] = {800,600};
 int my_ORIGIN[] = {my_SIZE[0]/2, my_SIZE[1]/2};
 void my_putpixel(int x, int y, int c)

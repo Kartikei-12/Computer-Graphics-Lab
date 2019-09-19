@@ -87,7 +87,7 @@ void draw_T()
 void draw_semi_circle(int x_c, int y_c, int r)
 {
     int p = 1-r;
-    for(int x=0, y=r; x<=(r/sqrt(2)); p += (p<0)? (2*++x + 1) : (2*(++x-(--y)) + 1))
+    for(int x=0, y=r; x<=(r/sqrt(2)); p += (p<0)? (2*x + 1) : (2*(x-(--y)) + 1))
     {
         my_putpixel( x + x_c,  y + y_c, WHITE); // 0 Oct
         // my_putpixel(-x + x_c,  y + y_c, WHITE); // 7 Oct
@@ -97,6 +97,7 @@ void draw_semi_circle(int x_c, int y_c, int r)
         // my_putpixel(-y + x_c,  x + y_c, WHITE); // 6 Oct
         my_putpixel( y + x_c, -x + y_c, WHITE); // 2 Oct
         // my_putpixel(-y + x_c, -x + y_c, WHITE); // 5 Oct
+        ++x;
     }
 }
 
