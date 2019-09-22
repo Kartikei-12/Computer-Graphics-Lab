@@ -9,30 +9,16 @@
 #define cout std::cout
 #define endl std::endl
 
-void print() { cout<<endl; }
-template <
-    template <typename, typename> class ContainerType,
-    typename ValueType,
-    typename AllocType
->
-void print(const ContainerType<ValueType, AllocType>& v) {
-    for(ValueType i : v) cout<<i<<" ";
-    cout<<endl;
-}
-template<typename T, typename... Rest>
-void print(T t, Rest... rs) { cout<<t<<" "; print(rs...); }
-
 int my_SIZE[] = {800,600};
 int my_ORIGIN[] = {my_SIZE[0]/2, my_SIZE[1]/2};
 void my_putpixel(int x, int y, int c)
 {
-    // if(
-    //     (x+my_ORIGIN[0]) < 0 ||
-    //     (my_SIZE[1]-(y+my_ORIGIN[1])) < 0 ||
-    //     (x+my_ORIGIN[0]) > my_SIZE[0] ||
-    //     (my_SIZE[1]-(y+my_ORIGIN[1])) > my_SIZE[1]
-    // )
-    //     print("Point:", x, y, "outside the screen");
+    int x_ = x+my_ORIGIN[0], y_ = my_SIZE[1]-(y+my_ORIGIN[1]);
+    if (
+        x_ < 0  || y_ < 0  ||
+        x_ > my_SIZE[0] || y_ > my_SIZE[1]
+    )
+        cout<<"Point: "<<x<<" "<<y<<" outside the screen.";
     putpixel(x+my_ORIGIN[0], my_SIZE[1]-(y+my_ORIGIN[1]), c);
 }
 int my_getpixel(int x, int y) {

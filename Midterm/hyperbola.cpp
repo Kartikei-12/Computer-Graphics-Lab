@@ -1,5 +1,5 @@
 // Author: Kartikei Mittal
-// Parabola
+// Hyperbola
 #include <bits/stdc++.h>
 #include <graphics.h>
 
@@ -25,42 +25,50 @@ void my_putpixel(int x, int y, int c)
 int my_getpixel(int x, int y) {
     return getpixel(x+my_ORIGIN[0], my_SIZE[1]-(y+my_ORIGIN[1]));
 }
-void draw_x_axis() {for(int i=-my_ORIGIN[0]; i<my_ORIGIN[0]; i+=4) my_putpixel(i, 0, RED);}
-void draw_y_axis() {for(int i=-my_ORIGIN[1]; i<my_ORIGIN[1]; i+=4) my_putpixel(0, i, RED);}
+void draw_x_axis() {for(int i=-my_ORIGIN[0]; i<my_ORIGIN[0]; ++i) my_putpixel(i, 0, RED);}
+void draw_y_axis() {for(int i=-my_ORIGIN[1]; i<my_ORIGIN[1]; ++i) my_putpixel(0, i, RED);}
 
-void draw_parabola(int xc, int yc, int a)
+void draw_hyperbola(int xc, int yc, int a, int b)
 {
-    int p, aa = 2*a, count = 600;
-    int x = 0, y = 0;
+    int p, a2 = a*a, b2 = b*b, count = 200;
+    int x = a, y = 0;
 
-    p = 1 - aa;
-    while( aa > y )
-    {
-        my_putpixel(x + xc, yc - y, WHITE);
-        my_putpixel(x + xc, y++ + yc, WHITE);
-        if(p >= 0)
-        {
-            ++x;
-            p += 2*y - 2*aa + 3;
-        }
-        else
-            p += 2*y + 3;
-    }
+    for(int i=-my_ORIGIN[0]; i<my_ORIGIN[0]; i += 4)
+        my_putpixel(i, yc, GREEN);
 
-    p = (y+0.5)*(y+0.5) - 2*aa*(x+1);
-    while(count--)
+    p = b2*a + b2/4 - a2;
+    while( x*b2 > y*a2 )
     {
-        my_putpixel(x + xc, yc - y, WHITE);
-        my_putpixel(x++ + xc, yc + y, WHITE);
+        my_putpixel(xc + x, yc + y, WHITE);
+        my_putpixel(xc + x, yc - y, WHITE);
+        my_putpixel(xc - x, yc + y, WHITE);
+        my_putpixel(xc - x, yc - y, WHITE);
+        ++y;
         if(p < 0)
         {
-            ++y;
-            p += 2*(y+1) - 2*aa;
+            ++x;
+            p += -a2*(1 + 2*(y+1)) + 2*b2*(x + 1);
         }
         else
-            p += -2*aa;
+            p += -a2*(1 + 2*(y+1));
     }
-    
+
+    p = b2*(x+0.5)*(x+0.5) - a2*(y+1)*(y+1) - a2*b2;
+    while(count--)
+    {
+        my_putpixel(xc + x, yc + y, WHITE);
+        my_putpixel(xc + x, yc - y, WHITE);
+        my_putpixel(xc - x, yc + y, WHITE);
+        my_putpixel(xc - x, yc - y, WHITE);
+        ++x;
+        if(p >= 0)
+        {
+            ++y;
+            p += b2*(2*x + 3) - 2*a2*(y+1);
+        }
+        else
+            p += b2*(2*x + 3);
+    }
 }
 
 int main() try
@@ -68,7 +76,7 @@ int main() try
     initwindow(my_SIZE[0], my_SIZE[1], "Graphics Window");
     draw_x_axis(); draw_y_axis();
     
-    draw_parabola(-300, 100, 10);
+    draw_hyperbola(0, 10, 100, 50);
 
     while(!kbhit())
         delay(100);
